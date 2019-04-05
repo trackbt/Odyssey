@@ -1,0 +1,113 @@
+{
+  "title": "Bill of Lading",
+  "description": "Your premium will be calculated from cargo description",
+  "type": "object",
+  "required": [
+    "sender"
+  ],
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": ""
+        },
+        "address": {
+          "type": "string",
+          "default": ""
+        },
+        "country": {
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
+    "CargoCategory": {
+      "type": "string",
+      "enum": [
+        "Car",
+        "Cargo",
+        "Ship",
+        "Plant",
+        "Plane",
+        "Transport"
+      ]
+    },
+    "Country": {
+      "type": "string",
+      "enum": [
+        "Austria",
+        "Belgium",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Denmark",
+        "Estonia",
+        "Finland",
+        "France",
+        "Germany",
+        "Greece",
+        "Hungary",
+        "Ireland",
+        "Italy",
+        "Latvia",
+        "Luxembourg",
+        "Lithuania",
+        "Malta",
+        "Netherlands",
+        "Poland",
+        "Portugal",
+        "Romania",
+        "Slovak Republic",
+        "Slovenia",
+        "Spain",
+        "Sweden",
+        "United Kingdom"
+      ]
+    },
+    "Package": {
+      "type": "object",
+      "properties": {
+        "goodsId": {
+          "type": "string",
+          "title": "Identifier",
+          "default": "package-F488PS"
+        },
+        "type": {
+          "title": "Type",
+          "default": "Car",
+          "$ref": "#/definitions/CargoCategory"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "default": "2018 Ferrari 488 Pista Spider WH"
+        },
+        "value": {
+          "type": "number",
+          "title": "Value (EUR)",
+          "default": 320000
+        },
+        "quantity": {
+          "type": "number",
+          "title": "Quantity (pcs)",
+          "default": 1
+        },
+        "weight": {
+          "type": "number",
+          "title": "Weight (kg)",
+          "default": 1380
+        }
+      }
+    }
+  },
+  "properties": {
+    "sender": {
+      "type": "string",
+      "title": "Consigner / Sender",
+      "default": "DHL International GmbH"
+    }
+  }
+}

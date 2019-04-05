@@ -1,0 +1,47 @@
+{
+	"ui:field": "layout",
+	"ui:layout":[
+		{
+			"sender":{"md":6},
+			"fromCountry":{"md":6},
+			"fromPlace":{"md":12}
+		},
+		{
+			"receiver":{"md":6},
+			"toCountry":{"md":6},
+			"toPlace":{"md":12}
+		},
+		{"goods":12}
+
+	],
+	"sender": {
+		"ui:autofocus": true,
+		"ui:emptyValue": ""
+	},
+	"receiver": {
+		"ui:emptyValue": ""
+	},
+	"fromCountry": {
+		"ui:emptyValue": ""
+	},
+	"fromPlace": {
+		"ui:emptyValue": ""
+	},
+	"toCountry": {
+		"ui:emptyValue": ""
+	},
+	"toPlace": {
+		"ui:emptyValue": ""
+	},
+	"goods": {
+		"items": {
+			"classNames": "goods-items-list",
+			"ui:emptyValue": "",
+			"ui:options":  {
+				"removable": true,
+				"addable": true,
+				"orderable": true
+			}
+		}
+	}
+}
