@@ -25,6 +25,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "homepage": "https://trackbt.github.io/Odyssey/frontend/build",
   "browserslist": [
     ">0.2%",
     "not dead",
