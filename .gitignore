@@ -23,4 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 /.idea/
 /frontend/node_modules/
-!/frontend/build/static/css/main.e60fd154.chunk.css

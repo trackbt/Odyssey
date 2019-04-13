@@ -7,7 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
-// ReactDOM.render(<Form />, document.getElementById('bol-form'));
+// ReactDOM.render(<BOLForm />, document.getElementById('bol-form'));
 // ReactDOM.render(<StripeCheckout />, document.getElementById('checkout'));
 
 // If you want your app to work offline and load faster, you can change

@@ -33,7 +33,7 @@
 	"toPlace": {
 		"ui:emptyValue": ""
 	},
-	"goods": {
+	"Attachments": {
 		"items": {
 			"classNames": "goods-items-list",
 			"ui:emptyValue": "",

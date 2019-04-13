@@ -1,13 +1,13 @@
 {
-  "main.css": "/Odyssey/frontend/build/static/css/main.e60fd154.chunk.css",
-  "main.js": "/Odyssey/frontend/build/static/js/main.e6b95b8b.chunk.js",
-  "main.js.map": "/Odyssey/frontend/build/static/js/main.e6b95b8b.chunk.js.map",
+  "main.css": "/Odyssey/frontend/build/static/css/main.227f6286.chunk.css",
+  "main.js": "/Odyssey/frontend/build/static/js/main.72075fc4.chunk.js",
+  "main.js.map": "/Odyssey/frontend/build/static/js/main.72075fc4.chunk.js.map",
   "runtime~main.js": "/Odyssey/frontend/build/static/js/runtime~main.a24514ab.js",
   "runtime~main.js.map": "/Odyssey/frontend/build/static/js/runtime~main.a24514ab.js.map",
-  "static/js/2.418180a3.chunk.js": "/Odyssey/frontend/build/static/js/2.418180a3.chunk.js",
-  "static/js/2.418180a3.chunk.js.map": "/Odyssey/frontend/build/static/js/2.418180a3.chunk.js.map",
+  "static/js/2.c1d1d60e.chunk.js": "/Odyssey/frontend/build/static/js/2.c1d1d60e.chunk.js",
+  "static/js/2.c1d1d60e.chunk.js.map": "/Odyssey/frontend/build/static/js/2.c1d1d60e.chunk.js.map",
   "index.html": "/Odyssey/frontend/build/index.html",
-  "precache-manifest.5b02fb4d766dc39c3fa28ec3a089b253.js": "/Odyssey/frontend/build/precache-manifest.5b02fb4d766dc39c3fa28ec3a089b253.js",
+  "precache-manifest.da11304325726255b0ee0eb8e45b1539.js": "/Odyssey/frontend/build/precache-manifest.da11304325726255b0ee0eb8e45b1539.js",
   "service-worker.js": "/Odyssey/frontend/build/service-worker.js",
-  "static/css/main.e60fd154.chunk.css.map": "/Odyssey/frontend/build/static/css/main.e60fd154.chunk.css.map"
+  "static/css/main.227f6286.chunk.css.map": "/Odyssey/frontend/build/static/css/main.227f6286.chunk.css.map"
 }

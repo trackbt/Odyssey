@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './component.css';
 
 import Form from "react-jsonschema-form";
-// import formSchema from './form-schema.json';
-import formSchema from './form-schema-test.json';
+import formSchema from './form-schema.json';
+// import formSchema from './form-schema-test.json';
 import formUiSchema from './form-ui-schema.json';
 
 

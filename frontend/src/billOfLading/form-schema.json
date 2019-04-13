@@ -3,8 +3,9 @@
   "description": "Your premium will be calculated from cargo description",
   "type": "object",
   "required": [
-    "sender",
-    "receiver",
+    "Sender",
+    "Receiver",
+    "Carrier",
     "fromCountry",
     "fromPlace",
     "toCountry",
@@ -37,6 +38,18 @@
         "Plant",
         "Plane",
         "Transport"
+      ]
+    },
+    "GoodsType": {
+      "type": "string",
+      "enum": [
+        "CONTAINER", "LIQUID", "DRY", "BREAKBULK", "RORO"
+      ]
+    },
+    "GoodsStatus": {
+      "type": "string",
+      "enum": [
+        "OK", "DAMAGED", "LOST"
       ]
     },
     "Country": {
@@ -72,59 +85,111 @@
         "United Kingdom"
       ]
     },
+    "CountryIso": {
+      "type": "string",
+      "enum": ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
+    },
+    "TransportRoute":{
+      "type": "object",
+      "properties": {
+
+        "SequenceNr": {
+          "type": "number",
+          "title": "Seq. No.",
+          "default": 0
+        },
+        "FromCountry": {
+          "type": "string",
+          "title": "Delivery address",
+          "default": "NL"
+        },
+        "FromPlace": {
+          "type": "string",
+          "title": "Delivery address",
+          "default": "Energieweg 10, 9743 AN Groningen"
+        },
+        "ToCountry": {
+          "type": "string",
+          "title": "Delivery address",
+          "default": "NL"
+        },
+        "ToPlace": {
+          "type": "string",
+          "title": "Delivery address",
+          "default": "Noord Brabantlaan 1A, 5652 LA Eindhoven"
+        }
+      }
+    },
+    "PaymentStatus":{
+      "type": "string",
+      "enum": [
+        "PENDING", "PAYED", "CANCELLED"
+      ]
+    },
     "Package": {
       "type": "object",
       "properties": {
-        "goodsId": {
+        "GoodsID": {
           "type": "string",
           "title": "Identifier",
           "default": "package-F488PS"
         },
-        "type": {
+        "GoodsType": {
           "title": "Type",
-          "default": "Car",
-          "$ref": "#/definitions/CargoCategory"
+          "default": "RORO",
+          "$ref": "#/definitions/GoodsType"
         },
-        "description": {
+        "Description": {
           "type": "string",
           "title": "Description",
           "default": "2018 Ferrari 488 Pista Spider WH"
         },
-        "value": {
+        "Value": {
           "type": "number",
           "title": "Value (EUR)",
           "default": 320000
         },
-        "quantity": {
+        "Quantity": {
           "type": "number",
           "title": "Quantity (pcs)",
           "default": 1
         },
-        "weight": {
+        "Weight": {
           "type": "number",
           "title": "Weight (kg)",
           "default": 1380
+        },
+        "Status": {
+          "title": "Status",
+          "default": "OK",
+          "$ref": "#/definitions/GoodsStatus"
         }
       }
     }
   },
   "properties": {
-    "sender": {
+    "BillOfLadingID":{
+      "type": "string",
+      "title": "Package ID / BillOfLadingID",
+      "default": "DummyPackageID_3216546"
+    },
+    "Sender": {
       "type": "string",
       "title": "Consigner / Sender",
-      "default": "DHL International GmbH"
+      "default": "DutchChain"
     },
     "fromPlace": {
       "type": "string",
       "title": "Delivery address",
-      "default": "Pariser Platz, 10117 Berlin"
+      "default": "Energieweg 10, 9743 AN Groningen"
     },
     "fromCountry": {
-      "title": "Origin country",
-      "default": "Germany",
-      "$ref": "#/definitions/Country"
+      "title": "Origin country (ISO)",
+      "default": "NL",
+      "$ref": "#/definitions/CountryIso"
     },
-    "receiver": {
+
+    "Receiver": {
       "type": "string",
       "title": "Consignee / Recipient",
       "default": "Formula One World Championship Limited"
@@ -135,16 +200,37 @@
       "default": "Noord Brabantlaan 1A, 5652 LA Eindhoven"
     },
     "toCountry": {
-      "title": "Delivery country",
-      "default": "Netherlands",
-      "$ref": "#/definitions/Country"
+      "title": "Delivery country (ISO)",
+      "default": "NL",
+      "$ref": "#/definitions/CountryIso"
     },
-    "goods": {
+    "Carrier": {
+      "type": "string",
+      "title": "Carrier",
+      "default": "DHL International GmbH"
+    },
+    "Goods": {
       "type": "array",
       "title": "List of Goods",
       "minItems": 1,
       "items": {
         "$ref": "#/definitions/Package"
+      },
+      "files": {
+        "type": "array",
+        "title": "Additional files",
+        "items": {
+          "type": "string",
+          "format": "data-url"
+        }
+      }
+    },
+    "TransportRoutes": {
+      "type": "array",
+      "title": "Transport Routes / Legs",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/TransportRoute"
       },
       "files": {
         "type": "array",

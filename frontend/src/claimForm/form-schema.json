@@ -1,150 +1,63 @@
 {
-  "title": "Bill of Lading",
-  "description": "Your premium will be calculated from cargo description",
+  "title": "Trigger Claim",
+  "description": "Please state your claim filling in this form. More details help us solve your issue sooner.",
   "type": "object",
-  "required": [
-    "sender",
-    "receiver",
-    "fromCountry",
-    "fromPlace",
-    "toCountry",
-    "toPlace"
-  ],
+  "required": [  ],
   "definitions": {
-    "Address": {
+    "ClaimType": {
+      "type": "string",
+      "enum": [
+        "Delayed",
+        "Stolen",
+        "Minor damage",
+        "Major damage",
+        "Total loss"
+      ]
+    },
+    "Attachment": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "default": ""
+          "title": "Name",
+          "default": "Photo of flooded damage"
         },
-        "address": {
+        "url": {
+          "title": "Url",
           "type": "string",
-          "default": ""
-        },
-        "country": {
-          "type": "string",
-          "default": ""
-        }
-      }
-    },
-    "CargoCategory": {
-      "type": "string",
-      "enum": [
-        "Car",
-        "Cargo",
-        "Ship",
-        "Plant",
-        "Plane",
-        "Transport"
-      ]
-    },
-    "Country": {
-      "type": "string",
-      "enum": [
-        "Austria",
-        "Belgium",
-        "Bulgaria",
-        "Croatia",
-        "Cyprus",
-        "Czech Republic",
-        "Denmark",
-        "Estonia",
-        "Finland",
-        "France",
-        "Germany",
-        "Greece",
-        "Hungary",
-        "Ireland",
-        "Italy",
-        "Latvia",
-        "Luxembourg",
-        "Lithuania",
-        "Malta",
-        "Netherlands",
-        "Poland",
-        "Portugal",
-        "Romania",
-        "Slovak Republic",
-        "Slovenia",
-        "Spain",
-        "Sweden",
-        "United Kingdom"
-      ]
-    },
-    "Package": {
-      "type": "object",
-      "properties": {
-        "goodsId": {
-          "type": "string",
-          "title": "Identifier",
-          "default": "package-F488PS"
-        },
-        "type": {
-          "title": "Type",
-          "default": "Car",
-          "$ref": "#/definitions/CargoCategory"
+          "default": "/::fileSystem/DCIM/camera/12549873.jpg"
         },
         "description": {
           "type": "string",
           "title": "Description",
-          "default": "2018 Ferrari 488 Pista Spider WH"
-        },
-        "value": {
-          "type": "number",
-          "title": "Value (EUR)",
-          "default": 320000
-        },
-        "quantity": {
-          "type": "number",
-          "title": "Quantity (pcs)",
-          "default": 1
-        },
-        "weight": {
-          "type": "number",
-          "title": "Weight (kg)",
-          "default": 1380
+          "default": "Car has flooded carpet"
         }
       }
     }
   },
   "properties": {
-    "sender": {
+    "PolicyID": {
       "type": "string",
-      "title": "Consigner / Sender",
-      "default": "DHL International GmbH"
+      "title": "Insurance Policy Id",
+      "default": "some policy id"
     },
-    "fromPlace": {
+    "ClaimType": {
+      "title": "Claim type",
       "type": "string",
-      "title": "Delivery address",
-      "default": "Pariser Platz, 10117 Berlin"
+      "default": "Total loss",
+      "$ref": "#/definitions/ClaimType"
     },
-    "fromCountry": {
-      "title": "Origin country",
-      "default": "Germany",
-      "$ref": "#/definitions/Country"
-    },
-    "receiver": {
+    "Description": {
       "type": "string",
-      "title": "Consignee / Recipient",
-      "default": "Formula One World Championship Limited"
+      "title": "Claim description",
+      "default": "We`ve received flooded goods. For us it is a total loss, please take it into account and solve this promptly."
     },
-    "toPlace": {
-      "type": "string",
-      "title": "Delivery address",
-      "default": "Noord Brabantlaan 1A, 5652 LA Eindhoven"
-    },
-    "toCountry": {
-      "title": "Delivery country",
-      "default": "Netherlands",
-      "$ref": "#/definitions/Country"
-    },
-    "goods": {
+    "Attachments": {
       "type": "array",
-      "title": "List of Goods",
-      "minItems": 1,
+      "title": "Attached files",
+      "minItems": 0,
       "items": {
-        "$ref": "#/definitions/Package"
+        "$ref": "#/definitions/Attachment"
       },
       "files": {
         "type": "array",

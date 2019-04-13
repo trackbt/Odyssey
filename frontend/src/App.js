@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import FancyNavBar from './layout/FancyNavBar';
-import Form from './billOfLading/BOLForm';
+import BolForm from './billOfLading/BOLForm';
+import ClaimForm from './claimForm/ClaimForm';
 import Checkout from './checkout/StripeCheckout';
 import ReactLoading from 'react-loading';
 import ls from 'local-storage'
@@ -25,6 +26,12 @@ class App extends Component {
             failReason: "Check your internet connection.",
             loggedUser: "The Consigner",
             isTakingTooLong: false,
+            api_urls:{
+                get_premium:'https://r0xsanekn1.execute-api.us-east-1.amazonaws.com/dev/get_premium/',
+                pay_premium:'https://r0xsanekn1.execute-api.us-east-1.amazonaws.com/dev/pay_premium/'
+
+            },
+
             dummyDataFromAPI: {
                 "zones": [{
                     "max": {"temperature": 270, "time": 4294967295},
@@ -71,8 +78,8 @@ class App extends Component {
         this.setState({uiState: "REST_FAIL", failReason: info});
     }
 
-    onFormFilled = (formData) => {
-        console.log("onFormFilled");
+    onBolFormFilled = (formData) => {
+        console.log("onBolFormFilled");
         console.log(this.state);
         this.setState({
             uiState: "PAYMENT_LOADING",
@@ -80,7 +87,7 @@ class App extends Component {
             filledFormData: formData
         });
         // API call for customized premium price
-        fetch('https://r0xsanekn1.execute-api.us-east-1.amazonaws.com/dev/get_premium/', {
+        fetch(this.state.api_urls.get_premium, {
             method: 'POST',
             headers: {"content-type": "application/json"},  // todo , "Access-Control-Allow-Origin":"*" ??
             body: JSON.stringify(formData),
@@ -94,7 +101,7 @@ class App extends Component {
                 return response.json();
             }
         }).then(data => {
-            console.log("received data from API");
+            console.log("received data from TVM API");
             if (data.hasOwnProperty("zones")) {
                 console.log(data.zones);
                 this.onPremiumReceived(data.premium.price, data.zones, data.premium.policy_draft_pdf);
@@ -122,7 +129,7 @@ class App extends Component {
         console.log(this.state)
         this.setState({uiState: "CONTRACT_LOADING", loadingTitle: "Creating the Premium contract"});
         // API call for contract pdf
-        fetch('https://r0xsanekn1.execute-api.us-east-1.amazonaws.com/dev/pay_premium/', {
+        fetch(this.state.api_urls.pay_premium, {
             method: 'POST',
             headers: {"content-type": "application/json"},  // todo
             body: JSON.stringify({paymentOK: true}),
@@ -161,7 +168,7 @@ class App extends Component {
         // 	2000
         // );
     }
-
+OL
     onPolicyReceived = (bolPdf, contractPdf, contractId, contractPage, triggerPage) => {
         console.log("onPolicyReceived")
         console.log(this.state)
@@ -176,7 +183,8 @@ class App extends Component {
         console.log("App render state -- saving");
         console.log(this.state);
         this.saveLocalState();
-        if (this.state.loggedUser == "TVM") {
+        if (this.state.loggedUser === "TVM") {
+            // tvm claims dashboard
             return (
                 <div className="App">
                     {this.renderNavbar()}
@@ -204,7 +212,7 @@ class App extends Component {
                         <div className="App">
                             {this.renderNavbar()}
                             <div className="App-contents" id="bol-form">
-                                <Form onNextStep={this.onFormFilled}/>
+                                <BolForm onNextStep={this.onBolFormFilled}/>
                             </div>
                             <div className="App-contents" id="checkout"></div>
                         </div>
@@ -235,7 +243,7 @@ class App extends Component {
                                     <a href={this.state.contractPage} target="_blank" className="btn btn-secondary">Contract
                                         state</a>
                                     <a href={this.state.triggerClaimPage} target="_blank"
-                                       className="btn btn-secondary">Instant Smart COntract Trigger claim</a>
+                                       className="btn btn-secondary">Trigger claim contract</a>
                                     <a href={() => this.onNewClaim(this.state.contractId)} target="_blank"
                                        className="btn btn-secondary">Trigger
                                         claim</a>
@@ -260,6 +268,16 @@ class App extends Component {
                     );
                     break;
                 case "CLAIM":
+                    return (
+                        <div className="App">
+                            {this.renderNavbar()}
+                            <div className="App-contents" id="claim-form">
+                                <ClaimForm onNextStep={this.onClaimFormFilled} contractId={this.state.contractId}/>
+                            </div>
+                        </div>
+                    );
+                    break;
+                case "CLAIM_DONE":
                     return (
                         <div className="App">
                             {this.renderNavbar()}
